@@ -19,8 +19,8 @@ The following services are used in the demos:
 To run this solution, you will need the following:
 1. An AWS Account.
 1. Install and configure [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to interact with AWS.
-1. Sample application is written in .NET 6, so you need to have .NET 6 SDK installed (this is part of Visual Studio 2022 if you use it as your IDE).
-1. IDE of your choice to work with .NET 6 project (Visual Studio Code / Visual Studio 2022 / JetBrains Rider).
+1. Sample application is written in .NET 8, so you need to have [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) installed.
+1. IDE of your choice to work with .NET 8 project (Visual Studio Code / Visual Studio 2022 / JetBrains Rider).
 
 ## Sample files
 
