@@ -90,7 +90,9 @@ For the IDP demo, you will need to do the following preparations:
 ```
 - Update code in **IDP.cshtml.cs** to point to the S3 bucket you created and IAM role.
 
-> [!CAUTION] Please note, that as part of IDP demo you are going to create an endpoint to run the real-time analysis.
+> [!WARNING]
+> 
+> Please note, that as part of IDP demo you are going to create an endpoint to run the real-time analysis.
 > An endpoint includes managed resources that makes your custom model available for real-time inference.
 >  
 > **Your account incurs charges for the endpoint from the time it starts until you delete it.** 
