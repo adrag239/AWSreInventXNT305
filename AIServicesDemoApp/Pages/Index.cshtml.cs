@@ -22,7 +22,7 @@ public class IndexModel(IAmazonComprehend comprehendClient, IAmazonTranslate tra
 
         public async Task OnPostLanguageAsync()
         {
-            // detect text language
+            // detect language
             var detectLanguageRequest = new DetectDominantLanguageRequest()
             {
                 Text = Text
@@ -39,6 +39,7 @@ public class IndexModel(IAmazonComprehend comprehendClient, IAmazonTranslate tra
             };
             var translateResponse = await translateClient.TranslateTextAsync(translateRequest);
             Result = translateResponse.TranslatedText;  
+            
             
         }
 

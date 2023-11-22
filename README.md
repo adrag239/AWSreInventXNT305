@@ -6,6 +6,8 @@ This sample application is designed to demo the usage of some of the AWS AI Serv
 
 You can also see how to build an end-to-end IDP (Intelligent Document Processing) application with .NET using AWS AI services.
 
+![idp.png](idp.png)
+
 The following services are used in the demos:
 - [Amazon Comprehend](https://aws.amazon.com/comprehend/)
 - [Amazon Translate](https://aws.amazon.com/translate/)
@@ -27,6 +29,8 @@ To run this solution, you will need the following:
 **Samples** folder contains 3 subfolders with images and documents that can be used for the demos:
 
 **Insurance** folder contains set of documents that can be used for the IDP demos:
+
+![idp-services.png](idp-services.png)
 
 - **insurance_comprehend_train_data.csv** can be used to train Amazon Comprehend custom classifier
 - **1-CMS1500.png**, **1-discharge-summary.jpg** and **1-drivers_license_alex.jpg** can be used to test custom classifier that is deployed to real-time endpoint
@@ -54,13 +58,41 @@ To run this solution, you will need the following:
 - **family.jpg** can be used to demo how Amazon Rekognition can detect Personal Protective Equipment (PPE) worn by persons in an image.
 - **grunt.jpg** can be used to demo how Amazon Rekognition can detect entities in an image.
 
-**IDP** folder contains sample documents that can be used to test custom document classifier trained on the [dataset](https://idp-assets-wwso.s3.us-east-2.amazonaws.com/workshop-data/classification-training.zip).
+**IDP** folder contains sample documents that can be used to test custom document classifier trained on the following [dataset](https://idp-assets-wwso.s3.us-east-2.amazonaws.com/workshop-data/classification-training.zip).
 
 ## How to use
 
 For all demos, except IDP demo, just open the solution or project file in your IDE, start the application. That's it! You don't need to configure the services, or deploy any infrastructure.
 
-For the IDP demo, you will need to do some preparations:
+For the IDP demo, you will need to do the following preparations:
 - Create S3 bucket and upload **insurance_comprehend_train_data.csv** from the **Samples/Insurance** folder.
-- Create IAM role that gives Amazon Comprehend access to list/read from the S3 bucket that you created.
+- Create IAM role with the policy that gives Amazon Comprehend access to list/read from the S3 bucket that you created:
+```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "s3:GetObject",
+        "Resource": [
+          "arn:aws:s3:::YOUR-S3-BUCKET/*"
+        ],
+        "Effect": "Allow"
+      },
+      {
+        "Action": "s3:ListBucket",
+        "Resource": [
+          "arn:aws:s3:::YOUR-S3-BUCKET"
+        ],
+        "Effect": "Allow"
+      }
+    ]
+  }
+```
 - Update code in **IDP.cshtml.cs** to point to the S3 bucket you created and IAM role.
+
+> [!CAUTION] Please note, that as part of IDP demo you are going to create an endpoint to run the real-time analysis.
+> An endpoint includes managed resources that makes your custom model available for real-time inference.
+>  
+> **Your account incurs charges for the endpoint from the time it starts until you delete it.** 
+>  
+> So once you stop playing with the demo, delete the endpoint!
